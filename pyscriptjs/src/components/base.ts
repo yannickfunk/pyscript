@@ -230,6 +230,7 @@ function createWidget(name: string, code: string, klass: string) {
                     console.log(output);
                 }
             } catch (err) {
+                console.log(`Error trying to run ${source}`)
                 console.log(err);
             }
         }

@@ -205,18 +205,20 @@ class Element:
     def add_class(self, classname):
         self.element.classList.add(classname)
 
+    @staticmethod
+    def add_classes(element, class_list):
+        if class_list:
+            for klass in class_list.split(" "):
+                element.classList.add(klass)
 
-def add_classes(element, class_list):
-    for klass in class_list.split(" "):
-        element.classList.add(klass)
+    @staticmethod
+    def create(what, id_=None, classes=""):
+        element = document.createElement(what)
+        if id_:
+            element.id = id_
+        Element.add_classes(element, classes)
 
-
-def create(what, id_=None, classes=""):
-    element = document.createElement(what)
-    if id_:
-        element.id = id_
-    add_classes(element, classes)
-    return Element(id_, element)
+        return Element(id_, element)
 
 
 class PyWidgetTheme:
@@ -254,7 +256,7 @@ class PyItemTemplate(Element):
 
     def create(self):
         console.log("creating section")
-        new_child = create("section", self._id, "task bg-white my-1")
+        new_child = super().create("section", self._id, "task bg-white my-1")
         console.log("creating values")
 
         console.log("creating innerHtml")
